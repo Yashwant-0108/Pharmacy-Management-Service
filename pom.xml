@@ -9,7 +9,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.oneHealth.patient.documents</groupId>
-	<artifactId>patientdocument</artifactId>
+	<artifactId>PharmacyManagementService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PharmacyManagementService</name>
 	<description>Demo project for Spring Boot</description>
@@ -67,5 +67,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>PharmacyManagementService</finalName>
 	</build>
 </project>
