@@ -7,6 +7,7 @@ import com.oneHealth.service.PharmacyService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,12 +54,12 @@ public class PharmacyController {
     }
 
     @PostMapping("/addPharmacies")
-    public ResponseEntity<Pharmacy> saveLab(@RequestBody Pharmacy pharmacy) throws DatabaseException {
+    public ResponseEntity<String> saveLab(@RequestBody Pharmacy pharmacy) throws DatabaseException {
         try {
            	Pharmacy savedPharmacy = pharmacyService.savePharmacy(pharmacy);
-                    return ResponseEntity.ok(savedPharmacy);
+                    return new ResponseEntity<>("Pharmacy Added",HttpStatus.OK);
         } catch (DatabaseException e) {
-                     throw e;
+        	throw e;
         }
     }
 
