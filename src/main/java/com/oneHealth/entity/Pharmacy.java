@@ -17,7 +17,7 @@ public class Pharmacy {
 	private String city;
 	private int pinCode;
 	private String email;
-	private int contactNo;
+	private String contactNo;
 	private Time openTime;
 	private Time closeTime;
 	private String licenseDocId;
@@ -25,7 +25,7 @@ public class Pharmacy {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Pharmacy(long pharmaId, String name, String address, String city, int pinCode, String email, int contactNo,
+	public Pharmacy(long pharmaId, String name, String address, String city, int pinCode, String email, String contactNo,
 			Time openTime, Time closeTime, String licenseDocId) {
 		super();
 		this.pharmaId = pharmaId;
@@ -81,10 +81,10 @@ public class Pharmacy {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getContactNo() {
+	public String getContactNo() {
 		return contactNo;
 	}
-	public void setContactNo(int contactNo) {
+	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
 	public Time getOpenTime() {
