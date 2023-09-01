@@ -49,26 +49,28 @@ public class PharmacyController {
      * @throws PharmacyNotFoundException If the pharmacy is not found.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Pharmacy> getPharmacyById(@PathVariable long id) throws DatabaseException, PharmacyNotFoundException {
-        try {
-            LOGGER.info("Fetching pharmacy by ID: " + id);
-            Optional<Pharmacy> pharmacy = pharmacyService.getPharmacyById(id);
+    public ResponseEntity<Pharmacy> getPharmacyById(@PathVariable long id) {
+        LOGGER.info("Fetching pharmacy by ID: " + id);
+        Optional<Pharmacy> pharmacy;
+		try {
+			pharmacy = pharmacyService.getPharmacyById(id);
+			 if (pharmacy.isPresent()) {
+		            LOGGER.info("Pharmacy found for ID: " + id);
+		            
+		        } else {
+		            LOGGER.warning("Pharmacy not found for ID: " + id);
+		            
+		        }
+		} catch (DatabaseException e) {
+			return ResponseEntity.noContent().build();
+		} catch (PharmacyNotFoundException e) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(pharmacy.get());
 
-            if (pharmacy.isPresent()) {
-                LOGGER.info("Pharmacy found for ID: " + id);
-                return ResponseEntity.ok(pharmacy.get());
-            } else {
-                LOGGER.warning("Pharmacy not found for ID: " + id);
-                throw new PharmacyNotFoundException("Pharmacy Not Found !!");
-            }
-        } catch (DatabaseException e) {
-            LOGGER.severe("Error fetching pharmacy by ID: " + id + ": " + e.getMessage());
-            throw e;
-        } catch (PharmacyNotFoundException e) {
-            LOGGER.warning("Pharmacy not found for ID: " + id + ": " + e.getMessage());
-            throw e;
-        }
+       
     }
+
 
     /**
      * Add a new pharmacy.
